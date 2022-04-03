@@ -1,7 +1,7 @@
 export {};
 
 type KeyValuePair = [key: string, value: any];
-type HashIndex = undefined | KeyValuePair[];
+type HashIndex = KeyValuePair[] | undefined;
 
 class HashTable {
   #tableSize: number = 0;
@@ -26,10 +26,10 @@ class HashTable {
     const hash = this.#hash(key);
     if (!this.#table[hash]) return;
 
-    const idx = this.#table[hash]?.findIndex(([k]) => k === key);
-    if (idx === undefined) return;
+    const index = this.#table[hash]?.findIndex(([k]) => k === key);
+    if (index === -1) return;
 
-    if (this.#table[hash]?.[idx]) this.#table[hash][idx][1] = value;
+    if (this.#table[hash]?.[index]) this.#table[hash][index][1] = value;
   }
 
   #resizeTable() {
