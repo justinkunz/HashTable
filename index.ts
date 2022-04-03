@@ -10,7 +10,7 @@ class HashTable {
   #elementCount: number = 0;
 
   constructor() {
-    this.#tableSize = 3;
+    this.#tableSize = 10;
     this.#table = Array(this.#tableSize);
     this.#capacityLimit = 0.8;
     this.#elementCount = 0;
