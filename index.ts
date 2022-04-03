@@ -44,8 +44,12 @@ class HashTable {
     this.#table = resizedTable;
   }
 
-  #getLoadFactor() {
+  get #loadFactor() {
     return this.#elementCount / this.#tableSize;
+  }
+
+  get #isOverCapacityLimit() {
+    return this.#loadFactor > this.#capacityLimit;
   }
 
   #hash(key: string) {
@@ -76,8 +80,10 @@ class HashTable {
 
   setItem(key: string, value: any) {
     if (this.has(key)) return this.#updateItem(key, value);
+
     this.#elementCount++;
-    if (this.#getLoadFactor() > this.#capacityLimit) this.#resizeTable();
+    if (this.#isOverCapacityLimit) this.#resizeTable();
+
     this.#setItem(key, value, this.#table);
   }
 }
